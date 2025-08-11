@@ -1,1 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APOCNET - Asia-Pacific Oral Cancer Early Detection Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #EF5350;
+            --secondary: #FF7043;
+            --body: #F8F3F0;
+            --text: #1D1D1B;
+            --secondary-dark: #9C3A26;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--white);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,149.3L1200,139L1200,320L1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center/cover no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Logos Section */
+        .logos {
+            background: var(--white);
+            padding: 60px 0;
+        }
+
+        .logos-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            max-width: 200px;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            filter: grayscale(0.3);
+        }
+
+        .logo-item:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+            filter: grayscale(0);
+        }
+
+        .logo-item img {
+            width: 100%;
+            height: auto;
+            max-height: 80px;
+            object-fit: contain;
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(239, 83, 80, 0.2);
+        }
+
+        /* Health Stats Section */
+        .health-stats {
+            background: var(--body);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Features Grid */
+        .features {
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: var(--white);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Activities Section */
+        .activities {
+            background: var(--body);
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .activity-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(239, 83, 80, 0.15);
+        }
+
+        .activity-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Countries Section */
+        .countries {
+            background: var(--white);
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .country-card {
+            background: var(--body);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .country-card:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .country-flag {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Partners Section */
+        .partners {
+            background: var(--body);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .partner-card {
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+
+        .partner-card:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .partner-card h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* SDGs Section */
+        .sdgs {
+            background: var(--white);
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .sdg-card {
+            background: var(--body);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-5px);
+            background: var(--white);
+        }
+
+        .sdg-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .footer-section a {
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .logos-grid {
+                gap: 3rem;
+            }
+            
+            .logo-item {
+                max-width: 180px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .partners-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            
+            .countries-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            .sdg-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .logos-grid {
+                gap: 2rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logo-item {
+                max-width: 150px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card, .sdg-card, .activity-card {
+                padding: 1.5rem;
+            }
+            
+            .cta-button {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            
+            .logo-item {
+                max-width: 120px;
+            }
+            
+            .logo-item img {
+                max-height: 60px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">APOCNET</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#statistics">Statistics</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#countries">Countries</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>APOCNET</h1>
+                <p>Asia-Pacific Oral Cancer Early Detection Network - Building a collaborative regional network to address barriers to early detection of oral cancer through data sharing, capacity building, telemedicine, and eLearning</p>
+                <a href="#about" class="cta-button">Join Our Network</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="logos">
+        <div class="container">
+            <div class="logos-grid">
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asia Connect" />
+                </div>
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/eu-logo.png" alt="European Union" />
+                </div>
+                <div class="logo-item animate-on-scroll">
+                    <img src="images/logos/tein-logo.png" alt="TEIN Cooperation Center" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About APOCNET</h2>
+            <div class="about-content">
+                <div class="about-text animate-on-scroll">
+                    <p>Oral cancer remains a significant health burden across many Asia-Pacific countries, where incidence rates are among the highest globally. APOCNET aims to establish a regional collaborative network across six countries to address the barriers to early detection.</p>
+                    <p>Our project focuses on leveraging the TEIN*CC network infrastructure to support the creation of scalable, sustainable training and detection platforms, ensuring equitable access to early diagnosis tools and collaborative research, especially in low- and middle-income countries.</p>
+                </div>
+                <div class="highlight animate-on-scroll">
+                    <h3>Our Mission</h3>
+                    <p>To build a collaborative regional network (APOCNET) for addressing barriers to early detection of oral cancer in Asia-Pacific using shared resources, digital technologies, and capacity-building programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="statistics" class="section health-stats">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Health Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Countries in Network</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Stakeholders Engaged</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Partner Organizations</div>
+                </div>
+                <div class="stat-card animate-on-scroll">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Collaborative Projects</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="activities" class="section activities">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Activities</h2>
+            <div class="activities-grid">
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">🤝</div>
+                    <h3>Stakeholder Engagement</h3>
+                    <p>Two workshops engaging 25+ stakeholders to share experiences, challenges, and solutions with MoUs signed</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">📊</div>
+                    <h3>Country Assessment</h3>
+                    <p>Structured questionnaires gathering baseline data on national cancer plans and technological readiness</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">🗺️</div>
+                    <h3>Resource Mapping</h3>
+                    <p>Documentation of barriers and mapping of shared and missing resources across all participating countries</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">💻</div>
+                    <h3>eLearning Platform</h3>
+                    <p>Planning eOralDetect platform for oral lesion detection with infrastructure assessments completed</p>
+                </div>
+                <div class="activity-card animate-on-scroll">
+                    <div class="activity-icon">📝</div>
+                    <h3>Proposal Development</h3>
+                    <p>Collaborative proposals in telemedicine, cancer registry data, healthcare training, and tobacco control</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section features">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🏥</div>
+                    <h3>Telemedicine Solutions</h3>
+                    <p>Low-cost teleconsultation tools for lesion assessment and follow-up care in remote and rural communities.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📚</div>
+                    <h3>Digital Training Platform</h3>
+                    <p>eOralDetect eLearning program for oral cancer screening to build capacity across member countries.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Regional Collaboration</h3>
+                    <p>Cross-country collaboration network leveraging TEIN*CC infrastructure for seamless data sharing.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">📈</div>
+                    <h3>Cancer Registry Data</h3>
+                    <p>Collaborative cancer registry initiatives for tracking trends and improving early detection strategies.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Capacity Building</h3>
+                    <p>Training programs for healthcare practitioners to detect high-risk oral lesions and provide early intervention.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">🚭</div>
+                    <h3>Tobacco Control</h3>
+                    <p>Integrated tobacco cessation programs as part of comprehensive oral cancer prevention strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="countries" class="section countries">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Participating Countries</h2>
+            <div class="countries-grid">
+                <div class="country-card animate-on-scroll">
+                    <div class="country-flag">🇲🇾</div>
+                    <h4>Malaysia</h4>
+                    <small>Lead Country</small>
+                </div>
+                <div class="country-card animate-on-scroll">
+                    <div class="country-flag">🇰🇭</div>
+                    <h4>Cambodia</h4>
+                    <small>Beneficiary</small>
+                </div>
+                <div class="country-card animate-on-scroll">
+                    <div class="country-flag">🇮🇩</div>
+                    <h4>Indonesia</h4>
+                    <small>Beneficiary</small>
+                </div>
+                <div class="country-card animate-on-scroll">
+                    <div class="country-flag">🇹🇭</div>
+                    <h4>Thailand</h4>
+                    <small>Beneficiary</small>
+                </div>
+                <div class="country-card animate-on-scroll">
+                    <div class="country-flag">🇱🇰</div>
+                    <h4>Sri Lanka</h4>
+                    <small>Beneficiary</small>
+                </div>
+                <div class="country-card animate-on-scroll">
+                    <div class="country-flag">🇳🇵</div>
+                    <h4>Nepal</h4>
+                    <small>Beneficiary</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="section partners">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Partner Organizations</h2>
+            <div class="partners-grid">
+                <div class="partner-card animate-on-scroll">
+                    <h4>University of Malaya</h4>
+                    <p>Malaysia - Lead Institution</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>Cancer Research Malaysia</h4>
+                    <p>CRM - Research Partner</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>University of Puthisastra</h4>
+                    <p>Cambodia</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>Trisakti University</h4>
+                    <p>Indonesia</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>University of Khon Kaen</h4>
+                    <p>Thailand</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>B.P. Koirala Institute</h4>
+                    <p>Nepal - Health Sciences</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>University of Peradeniya</h4>
+                    <p>Sri Lanka</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>MAHSA University</h4>
+                    <p>Malaysia</p>
+                </div>
+                <div class="partner-card animate-on-scroll">
+                    <h4>Ministries of Health</h4>
+                    <p>Malaysia & Cambodia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="section sdgs">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Sustainable Development Goals</h2>
+            <div class="sdg-grid">
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">4</div>
+                    <h3>Quality Education</h3>
+                    <p>Providing comprehensive eLearning platforms and training programs for healthcare professionals in oral cancer detection.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">9</div>
+                    <h3>Industry, Innovation and Infrastructure</h3>
+                    <p>Building robust digital health infrastructure and telemedicine solutions for sustainable cancer care delivery.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
+                    <div class="sdg-number">17</div>
+                    <h3>Partnerships for the Goals</h3>
+                    <p>Fostering international collaboration and knowledge sharing to strengthen regional health systems and cancer care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>APOCNET</h3>
+                    <p>Asia-Pacific Oral Cancer Early Detection Network</p>
+                    <p>Category: WP5 - 3rd Call</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#about">About</a>
+                    <a href="#statistics">Statistics</a>
+                    <a href="#activities">Activities</a>
+                    <a href="#features">Features</a>
+                    <a href="#countries">Countries</a>
+                    <a href="#partners">Partners</a>
+                    <a href="#impact">Impact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <p>eOralDetect eLearning Platform</p>
+                    <p>Telemedicine Solutions</p>
+                    <p>Cancer Registry Database</p>
+                    <p>Published in Oral Diseases Journal</p>
+                </div>
+            </div>
+            <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 2rem 0;">
+            <p>&copy; 2025 APOCNET Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileMenuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(239, 83, 80, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                header.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+                    <div class="sdg-number">3</div>
+                    <h3>Good Health and Well-being</h3>
+                    <p>Improving early detection and treatment of oral cancer to reduce mortality and enhance quality of life across the region.</p>
+                </div>
+                <div class="sdg-card animate-on-scroll">
